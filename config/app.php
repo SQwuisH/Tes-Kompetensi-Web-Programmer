@@ -168,6 +168,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
+        App\Providers\Filament\PetugasPanelProvider::class,
+        App\Providers\Filament\DokterPanelProvider::class,
+        App\Providers\Filament\KasirPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
