@@ -5,10 +5,16 @@ namespace App\Filament\Kasir\Resources;
 use App\Filament\Kasir\Resources\TreatmentResource\Pages;
 use App\Filament\Kasir\Resources\TreatmentResource\RelationManagers;
 use App\Models\Treatment;
+use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +29,11 @@ class TreatmentResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('patient_name')->label('Nama Pasien')->readOnly(),
+                Select::make('status')->label('Status Pendaftaran')->placeholder('Pilih Status Pembayaran')->required()->options([
+                    '1' => 'Sudah Dibayar',
+                    '0' => 'Belum Dibayar',
+                ]),
             ]);
     }
 
@@ -31,7 +41,9 @@ class TreatmentResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('patient_name')->label("Nama Pasien")->searchable(),
+                TextColumn::make('status')->label('Status Pembayaran')->formatStateUsing(fn ($state) => $state ? 'Belum Dibayar' : 'Sudah Dibayar'),
+                TextColumn::make('cost')->label('Harga'),
             ])
             ->filters([
                 //
@@ -46,6 +58,14 @@ class TreatmentResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $user = Filament::auth()->user();
+
+        return parent::getEloquentQuery()
+            ->where('cost', '>' ,0);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -57,8 +77,6 @@ class TreatmentResource extends Resource
     {
         return [
             'index' => Pages\ListTreatments::route('/'),
-            'create' => Pages\CreateTreatment::route('/create'),
-            'edit' => Pages\EditTreatment::route('/{record}/edit'),
         ];
     }
 }

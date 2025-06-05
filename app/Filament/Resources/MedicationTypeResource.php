@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TreatmentTypeResource\Pages;
-use App\Filament\Resources\TreatmentTypeResource\RelationManagers;
-use App\Models\TreatmentType;
+use App\Filament\Resources\MedicationTypeResource\Pages;
+use App\Filament\Resources\MedicationTypeResource\RelationManagers;
+use App\Models\MedicationType;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -15,9 +15,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TreatmentTypeResource extends Resource
+class MedicationTypeResource extends Resource
 {
-    protected static ?string $model = TreatmentType::class;
+    protected static ?string $model = MedicationType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,8 +25,7 @@ class TreatmentTypeResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required()->label("Tindakan Medis"),
-                TextInput::make('cost')->required()->label("Biaya Tindakan")->integer(),
+                TextInput::make('name')->required()->label("Nama Tipe Obat")->label('Masukkan Nama Tipe Obat'),
             ]);
     }
 
@@ -34,8 +33,7 @@ class TreatmentTypeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label("Tindakan Medis"),
-                TextColumn::make('cost')->money('idr')->label("Biaya Tindakan"),
+                TextColumn::make('name')->label("Tipe Obat"),
             ])
             ->filters([
                 //
@@ -60,7 +58,7 @@ class TreatmentTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTreatmentTypes::route('/'),
+            'index' => Pages\ListMedicationTypes::route('/'),
         ];
     }
 }

@@ -30,9 +30,9 @@ class UserResource extends Resource
                 TextInput::make('email')->required()->email(),
                 TextInput::make('password')->required()->password(),
                 Select::make('role')->options([
-                    'petugas' => 'petugas',
-                    'dokter' => 'dokter',
-                    'kasir' => 'kasir',
+                    'officer' => 'officer',
+                    'doctor' => 'doctor',
+                    'cashier' => 'cashier',
                 ])->required(),
             ]);
     }

@@ -9,6 +9,10 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        if($user = auth::user())
+        {
+            return redirect()->to($this->redirectToPanel($user));
+        }
         return view('auth.login');
     }
 
@@ -32,14 +36,14 @@ class LoginController extends Controller
 
     protected function redirectToPanel($user)
     {
-        $email = strtolower($user->email);
+        $role = strtolower($user->role);
 
         return match (true) {
-            str_ends_with($email, '@admin.com') => '/admin',
-            str_ends_with($email, '@petugas.com') => '/petugas',
-            str_ends_with($email, '@dokter.com') => '/dokter',
-            str_ends_with($email, '@kasir.com') => '/kasir',
-            default => '/',
+            default => false,
+            $role == 'admin' => 'admin',
+            $role == 'officer' => 'petugas',
+            $role == 'doctor' => 'dokter',
+            $role == 'cashier' => 'kasir',
         };
     }
 
@@ -50,6 +54,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

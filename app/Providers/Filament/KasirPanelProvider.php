@@ -26,7 +26,7 @@ class KasirPanelProvider extends PanelProvider
             ->id('kasir')
             ->path('kasir')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Green,
             ])
             ->brandName('Kasir')
             ->discoverResources(in: app_path('Filament/Kasir/Resources'), for: 'App\\Filament\\Kasir\\Resources')
@@ -37,7 +37,6 @@ class KasirPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Kasir/Widgets'), for: 'App\\Filament\\Kasir\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

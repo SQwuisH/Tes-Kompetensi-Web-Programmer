@@ -12,9 +12,29 @@ class Treatment extends Model
     protected $fillable = [
         'patient_name',
         'patient_address',
-        'type',
+        'patient_email',
+        'visit_type',
         'doctor_id',
+        'treatment_type',
         'medication',
-        'payment',
+        'cost',
+        'status',
     ];
+
+    public function Doctor()
+    {
+        return $this->belongsTo(User::class, 'doctor_id');
+    }
+    public function Medication()
+    {
+        return $this->belongsTo(Medication::class, 'Medication');
+    }
+    public function TreatmentType()
+    {
+        return $this->belongsTo(TreatmentType::class, 'treatment_type');
+    }
+    public function VisitType()
+    {
+        return $this->belongsTo(VisitType::class, 'visit_type');
+    }
 }

@@ -26,7 +26,7 @@ class PetugasPanelProvider extends PanelProvider
             ->id('petugas')
             ->path('petugas')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Green,
             ])
             ->brandName('Petugas')
             ->discoverResources(in: app_path('Filament/Petugas/Resources'), for: 'App\\Filament\\Petugas\\Resources')
@@ -37,7 +37,7 @@ class PetugasPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Petugas/Widgets'), for: 'App\\Filament\\Petugas\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                Widgets\StatsOverviewWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

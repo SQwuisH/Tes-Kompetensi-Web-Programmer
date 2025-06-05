@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MedicationResource\Pages;
 use App\Filament\Resources\MedicationResource\RelationManagers;
 use App\Models\Medication;
+use App\Models\MedicationType;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,9 +27,9 @@ class MedicationResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
-                TextInput::make('type')->required(),
-                TextInput::make('cost')->required(),
+                TextInput::make('name')->required()->label("Nama Obat")->placeholder('Masukkan Nama Obat'),
+                Select::make('type')->required()->label('Tipe Obat')->placeholder('Pilih Tipe Obat')->options(MedicationType::all()->pluck('name', 'id'))->searchable(),
+                TextInput::make('cost')->required()->label('Harga Obat')->placeholder('Masukkan Harga Obat')->integer(),
             ]);
     }
 
@@ -35,8 +37,8 @@ class MedicationResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('type'),
+                TextColumn::make('name')->label("Obat"),
+                TextColumn::make('type')->label(" Tipe Obat"),
                 TextColumn::make('cost')->money('idr'),
             ])
             ->filters([
@@ -63,8 +65,6 @@ class MedicationResource extends Resource
     {
         return [
             'index' => Pages\ListMedications::route('/'),
-            'create' => Pages\CreateMedication::route('/create'),
-            'edit' => Pages\EditMedication::route('/{record}/edit'),
         ];
     }
 }

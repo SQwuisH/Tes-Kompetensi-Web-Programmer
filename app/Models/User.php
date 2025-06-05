@@ -52,10 +52,10 @@ class User extends Authenticatable implements FilamentUser
     {
         return match ($panel->getId()) {
             default => false,
-            'admin' => str_ends_with($this->email, '@admin.com'),
-            'petugas' => str_ends_with($this->email, '@petugas.com'),
-            'dokter' => str_ends_with($this->email, '@dokter.com'),
-            'kasir' => str_ends_with($this->email, '@kasir.com'),
+            'admin' => $this->role == 'admin',
+            'petugas' => $this->role == 'officer',
+            'dokter' => $this->role == 'doctor',
+            'kasir' => $this->role == 'cashier',
         };
     }
 }

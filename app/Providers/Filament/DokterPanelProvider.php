@@ -26,7 +26,7 @@ class DokterPanelProvider extends PanelProvider
             ->id('dokter')
             ->path('dokter')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Green,
             ])
             ->brandName('Dokter')
             ->discoverResources(in: app_path('Filament/Dokter/Resources'), for: 'App\\Filament\\Dokter\\Resources')
@@ -37,7 +37,6 @@ class DokterPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Dokter/Widgets'), for: 'App\\Filament\\Dokter\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

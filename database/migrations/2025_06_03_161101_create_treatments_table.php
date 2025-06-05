@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('patient_name');
             $table->string('patient_address');
-            $table->foreignId('type');
+            $table->string('patient_email');
+            $table->foreignId('visit_type');
             $table->foreignId('doctor_id');
-            $table->string('medication');
-            $table->enum('payment', ['unpaid', 'paid']);
+            $table->foreignId('treatment_type')->nullable();
+            $table->string('medication')->nullable();
+            $table->integer('cost')->default('0');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
