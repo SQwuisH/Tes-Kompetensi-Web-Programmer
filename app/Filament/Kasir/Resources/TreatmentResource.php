@@ -31,8 +31,8 @@ class TreatmentResource extends Resource
             ->schema([
                 TextInput::make('patient_name')->label('Nama Pasien')->readOnly(),
                 Select::make('status')->label('Status Pendaftaran')->placeholder('Pilih Status Pembayaran')->required()->options([
-                    '1' => 'Sudah Dibayar',
                     '0' => 'Belum Dibayar',
+                    '1' => 'Sudah Dibayar',
                 ]),
             ]);
     }
@@ -42,7 +42,7 @@ class TreatmentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('patient_name')->label("Nama Pasien")->searchable(),
-                TextColumn::make('status')->label('Status Pembayaran')->formatStateUsing(fn ($state) => $state ? 'Belum Dibayar' : 'Sudah Dibayar'),
+                TextColumn::make('status')->label('Status Pembayaran')->formatStateUsing(fn ($state) => $state ? 'Sudah Dibayar' : 'Belum Dibayar'),
                 TextColumn::make('cost')->label('Harga'),
             ])
             ->filters([
