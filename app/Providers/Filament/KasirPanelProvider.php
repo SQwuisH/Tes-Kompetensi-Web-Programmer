@@ -37,6 +37,7 @@ class KasirPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Kasir/Widgets'), for: 'App\\Filament\\Kasir\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
+                Widgets\FilamentInfoWidget::class
             ])
             ->middleware([
                 EncryptCookies::class,

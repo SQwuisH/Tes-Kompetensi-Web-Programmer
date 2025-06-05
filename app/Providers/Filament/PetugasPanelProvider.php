@@ -37,7 +37,7 @@ class PetugasPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Petugas/Widgets'), for: 'App\\Filament\\Petugas\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\StatsOverviewWidget::class,
+                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

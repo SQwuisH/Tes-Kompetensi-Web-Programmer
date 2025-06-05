@@ -37,6 +37,7 @@ class DokterPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Dokter/Widgets'), for: 'App\\Filament\\Dokter\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
+                Widgets\FilamentInfoWidget::class
             ])
             ->middleware([
                 EncryptCookies::class,
