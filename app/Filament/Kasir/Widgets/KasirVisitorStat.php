@@ -11,8 +11,14 @@ class KasirVisitorStat extends BaseWidget
 {
     protected function getStats(): array
     {
+        for($i = 6; $i >=0; $i--)
+        {
+            $pasien[] = Treatment::where('created_at', 'like', date('Y-m-d', strtotime("-$i days")) . "%%")->count();
+        }
         return [
-            Stat::make('Pasien hari ini', Treatment::where('created_at', 'like', date('Y-m-d') . "%%")->count()),
+            Stat::make('Pasien', Treatment::where('created_at', 'like', date('Y-m-d') . "%%")->count())
+            ->descriptionIcon('heroicon-m-arrow-trending-up')
+            ->chart($pasien),
             Stat::make('Tindakan Terbanyak', DB::table('treatment_types')
                 ->where('id', function ($query) {
                     $query->select('treatment_type')
